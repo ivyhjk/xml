@@ -6,7 +6,7 @@ use DOMElement;
 use DOMDocument;
 
 /**
- * Short description
+ * Base class to represent a "tag", ex: <param> or <struct>.
  *
  * @since v1.0.0
  * @version v1.0.0
@@ -25,7 +25,7 @@ abstract class Tag
     abstract const string TAG_NAME;
 
     /**
-     * Description of what this does.
+     * Generate a new "tag" instance.
      *
      * @param DOMDocument $document
      *

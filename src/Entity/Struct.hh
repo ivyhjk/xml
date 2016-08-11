@@ -27,7 +27,7 @@ class Struct extends Tag
     const string TAG_NAME = 'struct';
 
     /**
-     * Description of what this does.
+     * Generate a new <struct> tag instance.
      *
      * @param Vector<Ivyhjk\Xml\Entity\Member> $members
      * @param DOMDocument $document
@@ -68,7 +68,7 @@ class Struct extends Tag
     }
 
     /**
-     * Description of what this does.
+     * Generate a new Struct from a given SimpleXMLElement $node.
      *
      * @param SimpleXMLElement $node
      * @param DOMDocument $document

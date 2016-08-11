@@ -3,7 +3,7 @@
 namespace Ivyhjk\Xml\Exception;
 
 /**
- * Short description
+ * Handle invalid node errors.
  *
  * @since v1.0.0
  * @version v1.0.0

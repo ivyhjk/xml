@@ -30,7 +30,7 @@ class Value extends Tag
     const string TAG_NAME = 'value';
 
     /**
-     * Description of what this does.
+     * Generate a new <value> tag instance.
      *
      * @param Vector<mixed> $values The values to use.
      * @param DOMDocument The root node to generate new elements.

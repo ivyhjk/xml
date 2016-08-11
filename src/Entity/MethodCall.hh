@@ -27,7 +27,7 @@ class MethodCall extends Tag
     const string TAG_NAME = 'methodCall';
 
     /**
-     * Description of what this does.
+     * Generate a new <methodCall> tag instance.
      *
      * @param Ivyhjk\Xml\Entity\MethodName $methodName The associated method name.
      * @param Ivyhjk\Xml\Entity\Params $params The associated parameters wrapper.

@@ -27,7 +27,7 @@ class Param extends Tag
     const string TAG_NAME = 'param';
 
     /**
-     * Description of what this does.
+     * Generate a new <param> tag instance.
      *
      * @param Vector<Ivyhjk\Xml\Entity\Value> $values The associated values.
      * @param DOMDocument $document The root node.
@@ -69,9 +69,10 @@ class Param extends Tag
     }
 
     /**
-     * Description of what this does.
+     * Generate a new Param instance from a SimpleXMLElement $node.
      *
-     * @param mixed $myVar Short description
+     * @param SimpleXMLElement $node The base SimpleXMLElement
+     * @param DOMDocument $document The base document
      *
      * @return void
      */

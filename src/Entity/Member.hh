@@ -27,7 +27,7 @@ class Member extends Tag
     const string TAG_NAME = 'member';
 
     /**
-     * Description of what this does.
+     * Generate a new <member> tag intance.
      *
      * @param string $name The member name.
      * @param Ivyhjk\Xml\Entity\Value $value The associated value.

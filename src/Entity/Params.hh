@@ -67,9 +67,10 @@ class Params extends Tag
     }
 
     /**
-     * Description of what this does.
+     * Generate a new Params instance from a given SimpleXMLElement node.
      *
-     * @param mixed $myVar Short description
+     * @param SimpleXMLElement $node The node to be parsed
+     * @param DOMDocument $document The root node.
      *
      * @return Ivyhjk\Xml\Entity\Params
      */

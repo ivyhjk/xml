@@ -27,9 +27,10 @@ class MethodName extends Tag
     const string TAG_NAME = 'methodName';
 
     /**
-     * Description of what this does.
+     * Generate a new <methodName> tag instance.
      *
-     * @param mixed $myVar Short description
+     * @param string $name The method name.
+     * @param DOMDocument $document A root XML node.
      *
      * @return void
      */
@@ -63,9 +64,10 @@ class MethodName extends Tag
     }
 
     /**
-     * Description of what this does.
+     * Generate a new MethodName from a SimpleXMLElement node.
      *
-     * @param mixed $myVar Short description
+     * @param SimpleXMLElement $node The node to be parsed.
+     * @param DOMDocument $document The root XML node.
      *
      * @return Ivyhjk\Xml\Entity\MethodName
      */
