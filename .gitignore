@@ -1,3 +1,4 @@
 /vendor
+/definitions
 composer.phar
 composer.lock
