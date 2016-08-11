@@ -125,7 +125,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the decode method when is send an invalid xml.
+     * Test the decode method when is sent an invalid xml.
      *
      * @return void
      */
@@ -139,7 +139,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Description of what this does.
+     * Test decode method when is sent a string.
      *
      * @return void
      */

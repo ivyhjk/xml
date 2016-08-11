@@ -19,7 +19,7 @@ use Ivyhjk\Xml\Exception\XmlException;
 class RPCTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Description of what this does.
+     * Test encode method with nested values.
      *
      * @return void
      */
