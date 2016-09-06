@@ -79,6 +79,6 @@ class ParamTest extends \PHPUnit_Framework_TestCase
 
         $paramEntity = Param::fromNode($node, $document);
 
-        $this->assertCount(1, $paramEntity->getValues());
+        static::assertCount(1, $paramEntity->getValues());
     }
 }

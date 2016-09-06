@@ -195,7 +195,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $entity = Value::fromNode($node, new DOMDocument());
 
-        $this->assertCount(1, $entity->getValues());
+        static::assertCount(1, $entity->getValues());
     }
 
     /**

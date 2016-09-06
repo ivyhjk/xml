@@ -127,6 +127,6 @@ class StructTest extends \PHPUnit_Framework_TestCase
 
         $structEntity = Struct::fromNode($node, new DOMDocument());
 
-        $this->assertCount(3, $structEntity->getMembers());
+        static::assertCount(3, $structEntity->getMembers());
     }
 }

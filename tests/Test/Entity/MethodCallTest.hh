@@ -95,11 +95,11 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
 
         $expectedMethodNameEntity = new MethodName('MyMethod', new DOMDocument());
 
-        $this->assertTrue(
+        static::assertTrue(
             $expectedParamsEntity == $methodCallEntity->getParams()
         );
 
-        $this->assertTrue(
+        static::assertTrue(
             $expectedMethodNameEntity == $methodCallEntity->getMethodName()
         );
     }
