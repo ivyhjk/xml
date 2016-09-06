@@ -97,7 +97,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         $encoded = preg_replace('/\n/', '', RPC::encode($parameters));
 
-        $this->assertSame($expected, $encoded);
+        static::assertSame($expected, $encoded);
     }
 
     /**
@@ -131,7 +131,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         $decoded = RPC::decode($xml);
 
-        $this->assertSame('foo', $decoded);
+        static::assertSame('foo', $decoded);
     }
 
     /**
@@ -154,7 +154,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         $decoded = RPC::decode($xml);
 
-        $this->assertSame(1337, $decoded);
+        static::assertSame(1337, $decoded);
     }
 
     /**
@@ -177,7 +177,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         $decoded = RPC::decode($xml);
 
-        $this->assertSame(13.37, $decoded);
+        static::assertSame(13.37, $decoded);
     }
 
     /**
@@ -260,6 +260,6 @@ class RPCTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $this->assertEquals($expected, $decoded);
+        static::assertEquals($expected, $decoded);
     }
 }

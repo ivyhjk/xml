@@ -37,7 +37,7 @@ class MethodNameTest extends \PHPUnit_Framework_TestCase
 
         $expectedXml = '<?xml version="1.0"?><methodName>foo</methodName>';
 
-        $this->assertEquals($expectedXml, $xml);
+        static::assertEquals($expectedXml, $xml);
     }
 
     /**
@@ -66,6 +66,6 @@ class MethodNameTest extends \PHPUnit_Framework_TestCase
 
         $methodName = MethodName::fromNode($node, new DOMDocument());
 
-        $this->assertSame('MyMethod', $methodName->getName());
+        static::assertSame('MyMethod', $methodName->getName());
     }
 }

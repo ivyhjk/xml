@@ -48,7 +48,7 @@ class ParamsTest extends \PHPUnit_Framework_TestCase
 
         $expectedXML = '<?xml version="1.0"?><params><param><value><string>foo</string></value></param><param><value><string>bar</string></value></param></params>';
 
-        $this->assertEquals($expectedXML, $xml);
+        static::assertEquals($expectedXML, $xml);
     }
 
     /**

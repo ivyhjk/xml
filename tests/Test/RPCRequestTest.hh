@@ -60,7 +60,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         $value = $this->getSingleValue($response, '/methodCall/params/param/value/string');
 
-        $this->assertSame('f00', $value);
+        static::assertSame('f00', $value);
     }
 
     /**
@@ -74,7 +74,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         $value = $this->getSingleValue($response, '/methodCall/params/param/value/double');
 
-        $this->assertSame(133.7, $value);
+        static::assertSame(133.7, $value);
     }
 
     /**
@@ -102,25 +102,25 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
         $method = $xml->xpath('/methodCall/methodName');
 
         while(list($_, $node) = each($method)) {
-            $this->assertSame('MyMethod', (string) $node);
+            static::assertSame('MyMethod', (string) $node);
         }
 
         $keys = $xml->xpath('/methodCall/params/param/value/struct/member/name');
 
         while(list($_, $node) = each($keys)) {
-            $this->assertContains((string) $node, ['foo', 'bar', 'baz']);
+            static::assertContains((string) $node, ['foo', 'bar', 'baz']);
         }
 
         $nestedKeys = $xml->xpath('/methodCall/params/param/value/struct/member/value/struct/member/name');
 
         while(list($_, $node) = each($nestedKeys)) {
-            $this->assertContains((string) $node, ['zzz', 'ccc']);
+            static::assertContains((string) $node, ['zzz', 'ccc']);
         }
 
         $reallyNestedKeys = $xml->xpath('/methodCall/params/param/value/struct/member/value/struct/member/value/struct/member/value/struct/member/name');
 
         while(list($_, $node) = each($reallyNestedKeys)) {
-            $this->assertSame('bbb', (string) $node);
+            static::assertSame('bbb', (string) $node);
         }
     }
 
@@ -134,7 +134,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
         try {
             RPCRequest::decode('');
         } catch (Exception $e) {
-            $this->assertInstanceOf(XmlException::class, $e);
+            static::assertInstanceOf(XmlException::class, $e);
         }
     }
 
@@ -179,7 +179,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $this->assertEquals($expected, $decoded);
+        static::assertEquals($expected, $decoded);
     }
 
     /**
@@ -268,6 +268,6 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $this->assertEquals($expected, $decoded);
+        static::assertEquals($expected, $decoded);
     }
 }

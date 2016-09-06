@@ -52,7 +52,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
 
         $xml = preg_replace('/\n/', '', $document->saveXML());
 
-        $this->assertSame($expectedXML, $xml);
+        static::assertSame($expectedXML, $xml);
     }
 
     /**

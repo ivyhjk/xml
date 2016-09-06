@@ -54,7 +54,7 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
 
         $xml = preg_replace('/\n/', '', $document->saveXML());
 
-        $this->assertSame($expectedXml, $xml);
+        static::assertSame($expectedXml, $xml);
     }
 
     /**

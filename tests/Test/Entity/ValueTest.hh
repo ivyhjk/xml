@@ -51,7 +51,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $expectedXml = '<?xml version="1.0"?><value><string>foo</string></value>';
 
-        $this->assertEquals($expectedXml, $this->getXml(Vector{'foo'}));
+        static::assertEquals($expectedXml, $this->getXml(Vector{'foo'}));
     }
 
     /**
@@ -63,7 +63,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $expectedXml = '<?xml version="1.0"?><value><int>1337</int></value>';
 
-        $this->assertEquals($expectedXml, $this->getXml(Vector{1337}));
+        static::assertEquals($expectedXml, $this->getXml(Vector{1337}));
     }
 
     /**
@@ -75,7 +75,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $expectedXml = '<?xml version="1.0"?><value><double>13.37</double></value>';
 
-        $this->assertEquals($expectedXml, $this->getXml(Vector{13.37}));
+        static::assertEquals($expectedXml, $this->getXml(Vector{13.37}));
     }
 
     /**
@@ -87,7 +87,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
     {
         $expectedXml = '<?xml version="1.0"?><value><double>1.0E+20</double></value>';
 
-        $this->assertEquals($expectedXml, $this->getXml(Vector{1.0E+20}));
+        static::assertEquals($expectedXml, $this->getXml(Vector{1.0E+20}));
     }
 
     /**
@@ -106,7 +106,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $this->assertEquals($expectedXml, $this->getXml($values));
+        static::assertEquals($expectedXml, $this->getXml($values));
     }
 
     /**
@@ -141,7 +141,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
             'foo'
         };
 
-        $this->assertEquals($expected, $entity->getValues());
+        static::assertEquals($expected, $entity->getValues());
     }
 
     /**
@@ -163,7 +163,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
             1337
         };
 
-        $this->assertEquals($expected, $entity->getValues());
+        static::assertEquals($expected, $entity->getValues());
     }
 
     /**
@@ -234,7 +234,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $parsed = Value::parseValue($entity);
 
-        $this->assertEquals($expectedValue, $parsed);
+        static::assertEquals($expectedValue, $parsed);
     }
 
     /**
@@ -315,7 +315,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $parsed = Value::parseValue($entity);
 
-        $this->assertEquals($expectedValue, $parsed);
+        static::assertEquals($expectedValue, $parsed);
     }
 
     /**
@@ -385,6 +385,6 @@ class ValueTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $this->assertEquals($expected, $parsed);
+        static::assertEquals($expected, $parsed);
     }
 }

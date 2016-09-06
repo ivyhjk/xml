@@ -60,7 +60,7 @@ class MemberTest extends \PHPUnit_Framework_TestCase
 
         $expectedXml = '<?xml version="1.0"?><member><name>hello</name><value><string>foo</string></value></member>';
 
-        $this->assertEquals($expectedXml, $xml);
+        static::assertEquals($expectedXml, $xml);
     }
 
     /**
@@ -134,8 +134,8 @@ class MemberTest extends \PHPUnit_Framework_TestCase
             'bar'
         };
 
-        $this->assertSame('foo', $memberEntity->getName());
-        $this->assertEquals(
+        static::assertSame('foo', $memberEntity->getName());
+        static::assertEquals(
             $expectedValues,
             $memberEntity->getValue()->getValues()
         );
