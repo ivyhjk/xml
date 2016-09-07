@@ -37,6 +37,8 @@ class RPCRequest
      */
     public static function encode(string $method, mixed $parameters, string $encoding = 'iso-8859-1') : string
     {
+        libxml_use_internal_errors(true);
+
         $document = new DOMDocument('1.0', $encoding);
 
         $methodName = new MethodName($method, $document);
@@ -64,6 +66,8 @@ class RPCRequest
      */
     public static function decode(string $xml) : Map<string, mixed>
     {
+        libxml_use_internal_errors(true);
+
         try {
             $element = new SimpleXMLElement($xml);
         } catch (Exception $e) {

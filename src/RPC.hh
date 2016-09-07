@@ -32,6 +32,8 @@ class RPC
      */
     public static function encode(mixed $parameters, string $encoding = 'utf-8') : string
     {
+        libxml_use_internal_errors(true);
+
         $document = new DOMDocument('1.0', $encoding);
 
         $value = new Value(Vector{$parameters}, $document);
@@ -54,6 +56,8 @@ class RPC
      */
     public static function decode(string $xml) : mixed
     {
+        libxml_use_internal_errors(true);
+
         try {
             $node = new SimpleXMLElement($xml);
         } catch (Exception $e) {
