@@ -262,4 +262,33 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals($expected, $decoded);
     }
+
+    /**
+     * Test encode method when an array is given.
+     *
+     * @return void
+     */
+    public function testArrayEncode() : void
+    {
+        $toEncode = ['foo', 'bar'];
+
+        $expected = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+            <?xml version="1.0" encoding="utf-8"?>
+            <params>
+                <param>
+                    <value>
+                        <string>foo</string>
+                    </value>
+                </param>
+                <param>
+                    <value>
+                        <string>bar</string>
+                    </value>
+                </param>
+            </params>');
+
+        $encoded = preg_replace('/\n/', '', RPC::encode($toEncode));
+
+        static::assertEquals($expected, $encoded);
+    }
 }

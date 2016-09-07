@@ -43,10 +43,22 @@ class RPCRequest
 
         $methodName = new MethodName($method, $document);
 
-        $value = new Value(Vector{$parameters}, $document);
-        $param = new Param(Vector{$value}, $document);
+        $givenParams = Vector{};
 
-        $params = new Params(Vector{$param}, $document);
+        if (is_array($parameters) && array_key_exists(0, $parameters)) {
+            foreach ($parameters as $parameter) {
+                $value = new Value(Vector{$parameter}, $document);
+                $param = new Param(Vector{$value}, $document);
+
+                $givenParams->add($param);
+            }
+        } else {
+            $value = new Value(Vector{$parameters}, $document);
+            $param = new Param(Vector{$value}, $document);
+            $givenParams = Vector{$param};
+        }
+
+        $params = new Params($givenParams, $document);
 
         $methodCall = new MethodCall($methodName, $params, $document);
 

@@ -270,4 +270,38 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals($expected, $decoded);
     }
+
+
+
+    /**
+     * Test encode method when an array is given.
+     *
+     * @return void
+     */
+    public function testArrayEncode() : void
+    {
+        $toEncode = ['bar', 'baz'];
+
+        $expected = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+            <?xml version="1.0" encoding="iso-8859-1"?>
+            <methodCall>
+                <methodName>foo</methodName>
+                <params>
+                    <param>
+                        <value>
+                            <string>bar</string>
+                        </value>
+                    </param>
+                    <param>
+                        <value>
+                            <string>baz</string>
+                        </value>
+                    </param>
+                </params>
+            </methodCall>');
+
+        $encoded = preg_replace('/\n/', '', RPCRequest::encode('foo', $toEncode));
+
+        static::assertEquals($expected, $encoded);
+    }
 }
