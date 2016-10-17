@@ -71,7 +71,7 @@ class MethodCall extends Tag
      */
     public function getElement() : DOMElement
     {
-        $element = $this->getDocument()->createElement('methodCall');
+        $element = $this->getDocument()->createElement(static::TAG_NAME);
 
         // Append the method name.
         $element->appendChild($this->getMethodName()->getElement());
@@ -92,20 +92,20 @@ class MethodCall extends Tag
     {
         $name = $node->getName();
 
-        if ($name !== self::TAG_NAME) {
+        if ($name !== static::TAG_NAME) {
             throw new InvalidNodeException();
         }
 
-        $methodNameNodes = new Vector($node->xpath('methodName'));
+        $methodNameNodes = new Vector($node->xpath(MethodName::TAG_NAME));
         $methodNameNode = $methodNameNodes->firstValue();
 
         if ($methodNameNode === null) {
-            throw new InvalidNodeException('Missing node "methodName"');
+            throw new InvalidNodeException(sprintf('Missing node "%s"', MethodName::TAG_NAME));
         }
 
         $methodNameEntity = MethodName::fromNode($methodNameNode, $document);
 
-        $paramsNodes = new Vector($node->xpath('params'));
+        $paramsNodes = new Vector($node->xpath(Params::TAG_NAME));
         $paramsNode = $paramsNodes->firstValue();
 
         if ($paramsNode === null) {

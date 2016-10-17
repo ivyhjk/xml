@@ -58,7 +58,7 @@ class MethodName extends Tag
     {
         $element = $this
             ->getDocument()
-            ->createElement('methodName', $this->getName());
+            ->createElement(static::TAG_NAME, $this->getName());
 
         return $element;
     }
@@ -75,7 +75,7 @@ class MethodName extends Tag
     {
         $name = $node->getName();
 
-        if ($name !== 'methodName') {
+        if ($name !== static::TAG_NAME) {
             throw new InvalidNodeException();
         }
 

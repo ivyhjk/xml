@@ -291,4 +291,47 @@ class RPCTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals($expected, $encoded);
     }
+
+    /**
+     * Test the response when the tag "methodResponse" exists into XML.
+     *
+     * @return void
+     */
+    public function testMethodResponse() : void
+    {
+        // minify the xml.
+        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+            <methodResponse>
+                <params>
+                    <param>
+                        <value>
+                            <struct>
+                                <member>
+                                    <name>foo</name>
+                                    <value>
+                                        <string>bar</string>
+                                    </value>
+                                </member>
+                                <member>
+                                    <name>bar</name>
+                                    <value>
+                                        <string>baz</string>
+                                    </value>
+                                </member>
+                            </struct>
+                        </value>
+                    </param>
+                </params>
+            </methodResponse>'
+        );
+
+        $expected = Map{
+            'foo' => 'bar',
+            'bar' => 'baz',
+        };
+
+        $decoded = RPC::decode($xml);
+
+        static::assertEquals($expected, $decoded);
+    }
 }

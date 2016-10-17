@@ -52,4 +52,14 @@ abstract class Tag
      * @return DOMElement
      */
     abstract public function getElement() : DOMElement;
+
+    /**
+     * Generate a new MethodResponse from a SimpleXMLElement node.
+     *
+     * @param SimpleXMLElement $node The node to be parsed.
+     * @param DOMDocument $document The root XML node.
+     *
+     * @return Ivyhjk\Xml\Entity\MethodResponse
+     */
+    abstract public static function fromNode(\SimpleXMLElement $node, DOMDocument $document) : Tag;
 }

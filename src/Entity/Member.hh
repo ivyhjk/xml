@@ -67,7 +67,7 @@ class Member extends Tag
      */
     public function getElement() : DOMElement
     {
-        $element = $this->getDocument()->createElement('member');
+        $element = $this->getDocument()->createElement(static::TAG_NAME);
 
         $name = $this->getDocument()->createElement('name', $this->getName());
 
@@ -87,20 +87,30 @@ class Member extends Tag
      */
     public static function fromNode(SimpleXMLElement $node, DOMDocument $document) : Member
     {
-        if ($node->getName() !== self::TAG_NAME) {
-            throw new InvalidNodeException('Invalid tag "name" for "member" node.');
+        if ($node->getName() !== static::TAG_NAME) {
+            throw new InvalidNodeException(sprintf(
+                'Invalid tag "name" for "%s" node.',
+                static::TAG_NAME
+            ));
         }
 
         $nameNode = (new Vector($node->xpath('name')))->firstValue();
 
         if ($nameNode === null) {
-            throw new InvalidNodeException('Tag "name" not found into "member" node.');
+            throw new InvalidNodeException(sprintf(
+                'Tag "name" not found into "%s" node.',
+                static::TAG_NAME
+            ));
         }
 
-        $valueNode = (new Vector($node->xpath('value')))->firstValue();
+        $valueNode = (new Vector($node->xpath(Value::TAG_NAME)))->firstValue();
 
         if ($valueNode === null) {
-            throw new InvalidNodeException('Tag "value" not found into "member" node.');
+            throw new InvalidNodeException(sprintf(
+                'Tag "%s" not found into "%s" node.',
+                Value::TAG_NAME,
+                static::TAG_NAME
+            ));
         }
 
         $memberName = (string) $nameNode;

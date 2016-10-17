@@ -58,7 +58,7 @@ class Param extends Tag
     {
         $element = $this
             ->getDocument()
-            ->createElement('param');
+            ->createElement(static::TAG_NAME);
 
         // Append the <value> tags to <param> tag.
         foreach ($this->getValues() as $value) {
@@ -79,11 +79,14 @@ class Param extends Tag
     public static function fromNode(SimpleXMLElement $node, DOMDocument $document) : Param
     {
         if ($node->getName() !== self::TAG_NAME) {
-            throw new InvalidNodeException('Missing tag "name" for node "param".');
+            throw new InvalidNodeException(sprintf(
+                'Missing tag "name" for node "%s".',
+                static::TAG_NAME
+            ));
         }
 
         $valueEntities = Vector{};
-        $valueNodes = $node->xpath('value');
+        $valueNodes = $node->xpath(Value::TAG_NAME);
 
         foreach ($valueNodes as $valueNode) {
             $valueEntity = Value::fromNode($valueNode, $document);

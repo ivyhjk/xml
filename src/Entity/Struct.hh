@@ -58,7 +58,7 @@ class Struct extends Tag
     {
         $element = $this
             ->getDocument()
-            ->createElement('struct');
+            ->createElement(static::TAG_NAME);
 
         foreach ($this->getMembers() as $member) {
             $element->appendChild($member->getElement());
@@ -78,11 +78,11 @@ class Struct extends Tag
      */
     public static function fromNode(SimpleXMLElement $node, DOMDocument $document) : Struct
     {
-        if ($node->getName() !== 'struct') {
+        if ($node->getName() !== static::TAG_NAME) {
             throw new InvalidNodeException();
         }
 
-        $memberNodes = $node->xpath('member');
+        $memberNodes = $node->xpath(Member::TAG_NAME);
 
         $memberEntities = Vector{};
 

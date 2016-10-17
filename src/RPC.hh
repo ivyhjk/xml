@@ -8,6 +8,7 @@ use SimpleXMLElement;
 use Ivyhjk\Xml\Entity\Value;
 use Ivyhjk\Xml\Entity\Param;
 use Ivyhjk\Xml\Entity\Params;
+use Ivyhjk\Xml\Entity\MethodResponse;
 use Ivyhjk\Xml\Exception\XmlException;
 
 /**
@@ -79,18 +80,30 @@ class RPC
         $decoded = Vector{};
         $document = new DOMDocument();
 
-        $paramsNode = Params::fromNode($node, $document);
+        $processParams = (Params $paramsNode) ==> {
+            foreach ($paramsNode->getParameters() as $paramEntity) {
+                $valueEntities = $paramEntity->getValues();
 
-        foreach ($paramsNode->getParameters() as $paramEntity) {
-            $valueEntities = $paramEntity->getValues();
+                $parsedValues = Value::parseValues($valueEntities);
 
-            $parsedValues = Value::parseValues($valueEntities);
-
-            if ($parsedValues->count() === 1) {
-                $decoded->add($parsedValues->firstValue());
-            } else {
-                $decoded->add($parsedValues);
+                if ($parsedValues->count() === 1) {
+                    $decoded->add($parsedValues->firstValue());
+                } else {
+                    $decoded->add($parsedValues);
+                }
             }
+        };
+
+        if ($node->getName() === MethodResponse::TAG_NAME) {
+            $methodResponse = MethodResponse::fromNode($node, $document);
+
+            foreach ($methodResponse->getParameters() as $params) {
+                $processParams($params);
+            }
+        } else {
+            $params = Params::fromNode($node, $document);
+
+            $processParams($params);
         }
 
         if ($decoded->count() === 1) {

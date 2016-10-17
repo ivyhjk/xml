@@ -64,49 +64,52 @@ class Value extends Tag
     {
         $valueElement = $this
             ->getDocument()
-            ->createElement('value');
+            ->createElement(static::TAG_NAME);
 
         // Create the element with anything.
         foreach ($this->getValues() as $value) {
-            $type = gettype($value);
-
-            if ($type === 'integer') {
-                $type = 'int';
-            } elseif ($type === 'object' || $type === 'array') {
-                $type = 'struct';
-            }
-
-            try {
-                ValueType::assert($type);
-            } catch (\UnexpectedValueException $e) {
-                throw new UnsupportedValueType($type);
-            }
-
-            if ($type === 'struct') {
-                $typeElement = null;
-
-                if ( ! $value instanceof KeyedTraversable) {
-                    throw new UnsupportedValueType(gettype($value));
-                }
-
-                $members = Vector{};
-
-                foreach ($value as $memberName => $memberValue) {
-                    $childValue = new Value(Vector{
-                        $memberValue
-                    }, $this->getDocument());
-
-                    $member = new Member($memberName, $childValue, $this->getDocument());
-
-                    $members->add($member);
-                }
-
-                $struct = new Struct($members, $this->getDocument());
-
-                $typeElement = $struct->getElement();
+            if ($value instanceof Struct) {
+                $typeElement = $value->getElement();
             } else {
-                // If is not struct always contain an string as value.
-                $typeElement = $this->getDocument()->createElement($type, (string) $value);
+                $type = gettype($value);
+
+                if ($type === 'integer') {
+                    $type = 'int';
+                } else if ($type === 'object' || $type === 'array') {
+                    $type = 'struct';
+                }
+
+                try {
+                    ValueType::assert($type);
+                } catch (\UnexpectedValueException $e) {
+                    throw new UnsupportedValueType($type);
+                }
+
+                if ($type === 'struct') {
+                    $typeElement = null;
+
+                    if ( ! $value instanceof KeyedTraversable) {
+                        throw new UnsupportedValueType(gettype($value));
+                    }
+
+                    $members = Vector{};
+
+                    foreach ($value as $memberName => $memberValue) {
+                        $childValue = new Value(Vector{
+                            $memberValue
+                        }, $this->getDocument());
+
+                        $member = new Member($memberName, $childValue, $this->getDocument());
+                        $members->add($member);
+                    }
+
+                    $struct = new Struct($members, $this->getDocument());
+
+                    $typeElement = $struct->getElement();
+                } else {
+                    // If is not struct always contain an string as value.
+                    $typeElement = $this->getDocument()->createElement($type, (string) $value);
+                }
             }
 
             $valueElement->appendChild($typeElement);
@@ -119,7 +122,10 @@ class Value extends Tag
     {
         // Name is mandatory!.
         if ($node->getName() !== self::TAG_NAME) {
-            throw new InvalidNodeException('Invalid tag name for "value".');
+            throw new InvalidNodeException(sprintf(
+                'Invalid tag name for "%s".',
+                static::TAG_NAME
+            ));
         }
 
         $children = $node->children();
@@ -133,7 +139,7 @@ class Value extends Tag
         foreach ($children as $child) {
             $childName = $child->getName();
 
-            if ($childName === 'struct') {
+            if ($childName === Struct::TAG_NAME) {
                 $casted = null;
 
                 $struct = Struct::fromNode($child, $document);
