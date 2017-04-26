@@ -11,7 +11,9 @@
             "email": "elvis.munoz.f@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "hhvm": "^3.18"
+    },
     "autoload" : {
         "psr-4" : {
             "Ivyhjk\\Xml\\" : "./src"
