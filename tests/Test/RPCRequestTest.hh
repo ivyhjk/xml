@@ -2,7 +2,6 @@
 
 namespace Ivyhjk\Test\Xml;
 
-use Exception;
 use SimpleXMLElement;
 use Ivyhjk\Xml\RPCRequest;
 use Ivyhjk\Xml\Exception\XmlException;
@@ -34,7 +33,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         $method = $xml->xpath($path);
 
-        while(list($_, $node) = each($method)) {
+        foreach ($method as $node) {
             $value = (string) $node;
 
             if (is_numeric($value)) {
@@ -101,25 +100,25 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         $method = $xml->xpath('/methodCall/methodName');
 
-        while(list($_, $node) = each($method)) {
+        foreach ($method as $node) {
             static::assertSame('MyMethod', (string) $node);
         }
 
         $keys = $xml->xpath('/methodCall/params/param/value/struct/member/name');
 
-        while(list($_, $node) = each($keys)) {
+        foreach ($keys as $node) {
             static::assertContains((string) $node, ['foo', 'bar', 'baz']);
         }
 
         $nestedKeys = $xml->xpath('/methodCall/params/param/value/struct/member/value/struct/member/name');
 
-        while(list($_, $node) = each($nestedKeys)) {
+        foreach ($nestedKeys as $node) {
             static::assertContains((string) $node, ['zzz', 'ccc']);
         }
 
         $reallyNestedKeys = $xml->xpath('/methodCall/params/param/value/struct/member/value/struct/member/value/struct/member/value/struct/member/name');
 
-        while(list($_, $node) = each($reallyNestedKeys)) {
+        foreach ($reallyNestedKeys as $node) {
             static::assertSame('bbb', (string) $node);
         }
     }
@@ -131,11 +130,8 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeInvalidXml() : void
     {
-        try {
-            RPCRequest::decode('');
-        } catch (Exception $e) {
-            static::assertInstanceOf(XmlException::class, $e);
-        }
+        $this->expectException(XmlException::class);
+        RPCRequest::decode('');
     }
 
     /**
@@ -270,8 +266,6 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
 
         static::assertEquals($expected, $decoded);
     }
-
-
 
     /**
      * Test encode method when an array is given.
