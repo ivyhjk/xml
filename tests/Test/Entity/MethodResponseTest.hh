@@ -65,7 +65,7 @@ class MethodResponseTest extends \PHPUnit_Framework_TestCase
 
         $domDocument->appendChild($methodResponse->getElement());
 
-        $xml = preg_replace('/\n/', '', $domDocument->saveXML());
+        $xml = \preg_replace('/\n/', '', $domDocument->saveXML());
 
         $expected = '<?xml version="1.0"?><methodResponse><params><param><value><struct><member><name>foo</name><value><string>bar</string></value></member></struct></value></param></params></methodResponse>';
 
@@ -92,7 +92,7 @@ class MethodResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromNode() : void
     {
-        $baseXML = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $baseXML = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0"?>
             <methodResponse>
                 <params>
@@ -123,7 +123,7 @@ class MethodResponseTest extends \PHPUnit_Framework_TestCase
 
         $domDocument->appendChild($response->getElement());
 
-        $decoded = preg_replace('/\n/', '', $domDocument->saveXML());
+        $decoded = \preg_replace('/\n/', '', $domDocument->saveXML());
 
         static::assertSame($baseXML, $decoded);
     }

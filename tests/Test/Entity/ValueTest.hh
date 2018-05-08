@@ -39,7 +39,7 @@ class ValueTest extends \PHPUnit_Framework_TestCase
 
         $xml = $document->saveXML();
 
-        return preg_replace('/\n/', '', $xml);
+        return \preg_replace('/\n/', '', $xml);
     }
 
     /**

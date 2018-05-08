@@ -37,7 +37,7 @@ class RPCRequest
      */
     public static function encode(string $method, mixed $parameters, string $encoding = 'iso-8859-1') : string
     {
-        libxml_use_internal_errors(true);
+        \libxml_use_internal_errors(true);
 
         $document = new DOMDocument('1.0', $encoding);
 
@@ -45,7 +45,7 @@ class RPCRequest
 
         $givenParams = Vector{};
 
-        if (is_array($parameters) && array_key_exists(0, $parameters)) {
+        if (is_array($parameters) && \array_key_exists(0, $parameters)) {
             foreach ($parameters as $parameter) {
                 $value = new Value(Vector{$parameter}, $document);
                 $param = new Param(Vector{$value}, $document);
@@ -78,7 +78,7 @@ class RPCRequest
      */
     public static function decode(string $xml) : Map<string, mixed>
     {
-        libxml_use_internal_errors(true);
+        \libxml_use_internal_errors(true);
 
         try {
             $element = new SimpleXMLElement($xml);

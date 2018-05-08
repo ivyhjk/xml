@@ -33,7 +33,7 @@ class MethodNameTest extends \PHPUnit_Framework_TestCase
 
         $document->appendChild($methodName->getElement());
 
-        $xml = preg_replace('/\n/', '', $document->saveXML());
+        $xml = \preg_replace('/\n/', '', $document->saveXML());
 
         $expectedXml = '<?xml version="1.0"?><methodName>foo</methodName>';
 

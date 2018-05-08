@@ -78,7 +78,7 @@ class Params extends Tag
     {
         // Name is mandatory!
         if ($node->getName() !== static::TAG_NAME) {
-            throw new InvalidNodeException(sprintf('Missing node "%s"', static::TAG_NAME));
+            throw new InvalidNodeException(\sprintf('Missing node "%s"', static::TAG_NAME));
         }
 
         // Get the params.

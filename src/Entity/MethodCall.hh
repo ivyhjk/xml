@@ -100,7 +100,7 @@ class MethodCall extends Tag
         $methodNameNode = $methodNameNodes->firstValue();
 
         if ($methodNameNode === null) {
-            throw new InvalidNodeException(sprintf('Missing node "%s"', MethodName::TAG_NAME));
+            throw new InvalidNodeException(\sprintf('Missing node "%s"', MethodName::TAG_NAME));
         }
 
         $methodNameEntity = MethodName::fromNode($methodNameNode, $document);

@@ -50,7 +50,7 @@ class StructTest extends \PHPUnit_Framework_TestCase
 
         $expectedXML = '<?xml version="1.0"?><struct><member><name>foo</name><value><string>foo</string></value></member></struct>';
 
-        $xml = preg_replace('/\n/', '', $document->saveXML());
+        $xml = \preg_replace('/\n/', '', $document->saveXML());
 
         static::assertSame($expectedXML, $xml);
     }

@@ -26,7 +26,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
     public function testEncode() : void
     {
         // minify the xml.
-        $expected = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $expected = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -95,7 +95,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
             }
         };
 
-        $encoded = preg_replace('/\n/', '', RPC::encode($parameters));
+        $encoded = \preg_replace('/\n/', '', RPC::encode($parameters));
 
         static::assertSame($expected, $encoded);
     }
@@ -118,7 +118,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeString() : void
     {
-        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $xml = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -141,7 +141,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeInteger() : void
     {
-        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $xml = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -164,7 +164,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
      */
     public function testDecodeDouble() : void
     {
-        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $xml = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -188,7 +188,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
     public function testDecodeNestedValues() : void
     {
         // minify the xml.
-        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $xml = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -272,7 +272,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
     {
         $toEncode = ['foo', 'bar'];
 
-        $expected = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $expected = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="utf-8"?>
             <params>
                 <param>
@@ -287,7 +287,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
                 </param>
             </params>');
 
-        $encoded = preg_replace('/\n/', '', RPC::encode($toEncode));
+        $encoded = \preg_replace('/\n/', '', RPC::encode($toEncode));
 
         static::assertEquals($expected, $encoded);
     }
@@ -300,7 +300,7 @@ class RPCTest extends \PHPUnit_Framework_TestCase
     public function testMethodResponse() : void
     {
         // minify the xml.
-        $xml = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $xml = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <methodResponse>
                 <params>
                     <param>
