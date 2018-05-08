@@ -79,7 +79,7 @@ class Param extends Tag
     public static function fromNode(SimpleXMLElement $node, DOMDocument $document) : Param
     {
         if ($node->getName() !== self::TAG_NAME) {
-            throw new InvalidNodeException(sprintf(
+            throw new InvalidNodeException(\sprintf(
                 'Missing tag "name" for node "%s".',
                 static::TAG_NAME
             ));

@@ -52,7 +52,7 @@ class MethodCallTest extends \PHPUnit_Framework_TestCase
 
         $expectedXml = '<?xml version="1.0"?><methodCall><methodName>MyMethod</methodName><params><param><value><string>foo</string></value></param><param><value><string>bar</string></value></param></params></methodCall>';
 
-        $xml = preg_replace('/\n/', '', $document->saveXML());
+        $xml = \preg_replace('/\n/', '', $document->saveXML());
 
         static::assertSame($expectedXml, $xml);
     }

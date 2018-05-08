@@ -33,13 +33,13 @@ class RPC
      */
     public static function encode(mixed $parameters, string $encoding = 'utf-8') : string
     {
-        libxml_use_internal_errors(true);
+        \libxml_use_internal_errors(true);
 
         $document = new DOMDocument('1.0', $encoding);
 
         $givenParams = Vector{};
 
-        if (is_array($parameters) && array_key_exists(0, $parameters)) {
+        if (is_array($parameters) && \array_key_exists(0, $parameters)) {
             foreach ($parameters as $parameter) {
                 $value = new Value(Vector{$parameter}, $document);
                 $param = new Param(Vector{$value}, $document);
@@ -69,7 +69,7 @@ class RPC
      */
     public static function decode(string $xml) : mixed
     {
-        libxml_use_internal_errors(true);
+        \libxml_use_internal_errors(true);
 
         try {
             $node = new SimpleXMLElement($xml);

@@ -23,7 +23,7 @@ class UnsupportedValueType extends XmlException
      */
     public function __construct(string $type) : void
     {
-        $message = sprintf('Unsupported value type: "%s"', $type);
+        $message = \sprintf('Unsupported value type: "%s"', $type);
 
         parent::__construct($message);
     }

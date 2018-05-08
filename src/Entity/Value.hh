@@ -71,7 +71,7 @@ class Value extends Tag
             if ($value instanceof Struct) {
                 $typeElement = $value->getElement();
             } else {
-                $type = gettype($value);
+                $type = \gettype($value);
 
                 if ($type === 'integer') {
                     $type = 'int';
@@ -89,7 +89,7 @@ class Value extends Tag
                     $typeElement = null;
 
                     if ( ! $value instanceof KeyedTraversable) {
-                        throw new UnsupportedValueType(gettype($value));
+                        throw new UnsupportedValueType(\gettype($value));
                     }
 
                     $members = Vector{};
@@ -122,7 +122,7 @@ class Value extends Tag
     {
         // Name is mandatory!.
         if ($node->getName() !== self::TAG_NAME) {
-            throw new InvalidNodeException(sprintf(
+            throw new InvalidNodeException(\sprintf(
                 'Invalid tag name for "%s".',
                 static::TAG_NAME
             ));

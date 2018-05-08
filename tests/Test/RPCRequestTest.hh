@@ -276,7 +276,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
     {
         $toEncode = ['bar', 'baz'];
 
-        $expected = preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
+        $expected = \preg_replace(['/>\s+</', '/\n/', '/\s+</'], ['><', '', '<'],'
             <?xml version="1.0" encoding="iso-8859-1"?>
             <methodCall>
                 <methodName>foo</methodName>
@@ -294,7 +294,7 @@ class RPCRequestTest extends \PHPUnit_Framework_TestCase
                 </params>
             </methodCall>');
 
-        $encoded = preg_replace('/\n/', '', RPCRequest::encode('foo', $toEncode));
+        $encoded = \preg_replace('/\n/', '', RPCRequest::encode('foo', $toEncode));
 
         static::assertEquals($expected, $encoded);
     }

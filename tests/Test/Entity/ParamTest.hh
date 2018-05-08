@@ -40,7 +40,7 @@ class ParamTest extends \PHPUnit_Framework_TestCase
 
         $document->appendChild($param->getElement());
 
-        $xml = preg_replace('/\n/', '', $document->saveXML());
+        $xml = \preg_replace('/\n/', '', $document->saveXML());
 
         $expectedXML = '<?xml version="1.0"?><param><value><string>foo</string></value><value><string>bar</string></value><value><string>baz</string></value></param>';
 
